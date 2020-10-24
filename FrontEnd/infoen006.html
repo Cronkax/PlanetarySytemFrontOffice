@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jupiter</title>
+		<link rel="stylesheet" href="infostyle.css" />
+		<script src="animacoes/006/UnityProgress.js"></script>
+    <script src="animacoes/006/UnityLoader.js"></script>
+    <script>
+			var unityInstance = UnityLoader.instantiate(
+				"unityContainer",
+				"animacoes/006/jupiter.json",
+				{onProgress: UnityProgress}
+			);
+    </script>
+		<style></style>
+	</head>
+	<body>
+		<div id="info">
+			<img id = "planet" src="img/006.gif">
+			<div id="texto">
+        <h1>Jupiter</h1>
+        <p>The fifth planet from the Sun and the largest in the Solar System.</p>
+        <p>Radius: 69911 km</p>
+        <p>Surface Area: 6.1419&#215;10<sup>10</sup> km<sup>2</sup></p>
+        <p>Volume: 1.4313&#215;10<sup>15</sup> km<sup>3</sup></p>
+        <p>Mass: 1.8982&#215;10<sup>27</sup> kg</p>
+        <p>Gravity: 24.79 m/s<sup>2</sup></p>
+        <p>Temperature:</p>
+				<table>
+					<tr>
+						<th>1 bar:</th>
+						<td>165 K</td> 
+					</tr>
+					<tr>
+						<th>0.1 bar:</th>
+						<td>112 K</td>
+					</tr>
+				</table>
+        <p>Rotation Period: 9.925 hours</p>
+        <p>Rotation Velocity: 12.6 km/s</p>
+        <p>Orbital Period: 11.862 years</p>
+        <p>Orbital Speed: 13.07 km/s</p>
+        <p>Satellites: 79</p>
+				<a id="wiki" href="https://en.wikipedia.org/wiki/Jupiter" >More Information</a>
+      </div>
+			<div id="unityContainer" ></div>
+		</div>			
+	</body>
+</html>

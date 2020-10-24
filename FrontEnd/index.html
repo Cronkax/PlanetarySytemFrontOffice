@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html>
+
+<style>
+	#myModal2 {
+		background-color: black;
+		color: white;
+	}
+
+	#insert2,
+	button {
+		display: inline-block;
+		border: 1px solid lightblue;
+		color: lightblue;
+		padding: 10px 25px;
+		text-align: center;
+		text-decoration: none;
+		font-size: 16px;
+		border-radius: 12px;
+		background: none;
+		min-width: 150px;
+		margin-left: 12px;
+	}
+
+	button:hover {
+		cursor: pointer;
+	}
+</style>
+
+<head>
+	<title> planets </title>
+
+	<!-- META INFORMATION -->
+
+	<meta charset="UTF-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<meta name="description" content="Leaflet plugin to animate marker !">
+	<meta name="keywords" content="Leaflet MovingMarker marker ewoken github animation">
+	<meta name="author" content="Ewoken">
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+	<link rel="stylesheet" href="style.css" />
+
+</head>
+
+
+
+<body onLoad="inic()">>
+
+
+	<main>
+		<section>
+			<div id="map">
+			</div>
+		</section>
+
+		<div id="myModal" class="modal">
+			<div id="myModal2" class="modal-content">
+				<span class="close">&times;</span>
+				<h2 id="insert"></h2>
+
+				<br>
+				<a id="insert2" target="_blank">More details</a>
+				<button id="btnExpand" onclick="clean(); expand(); ">Expand</button>
+				<button id="btnDim" onclick="clean(); dim()">Diminish</button>
+				<button id="btnMoreSpeed" onclick="clean(); moreSpeed()">More Speed</button>
+				<button id="btnLessSpeed" onclick="clean(); lessSpeed()">Less Speed</button>
+				<button id="btnChangeCenter" onclick="canChange()">Change Center</button>
+			</div>
+		</div>
+
+	</main>
+
+	<script type="text/javascript" src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script type="text/javascript" src="MovingMarker.js"></script>
+	<script src="L.Control.MousePosition.js"></script>
+
+	<script>
+		var url = 'http://www.site.com/234234234';
+		var id = url.substring(url.lastIndexOf('/') + 1);
+		var map = L.map('map').setView([39.60072, -8.39109], 18);
+
+		var tileUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+			layer = new L.TileLayer(tileUrl,
+				{
+					attribution: 'Maps © <a href=\"www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors',
+					maxZoom: 18
+				});
+
+
+		map.addLayer(layer);
+
+
+		var planets = "";
+
+
+
+		var canClean = 0;
+		var canCenter = 1;
+
+		var sunX;
+		var sunY;
+
+
+		var markers;
+		var rRatio = 1;
+
+		function inic() {
+			start();
+			changeCenter();
+		}
+
+		async function start() {
+
+
+			var xhr = new XMLHttpRequest();
+			xhr.withCredentials = false;
+
+			xhr.addEventListener("readystatechange", function () {
+				if (this.readyState === 4) {
+					console.log(JSON.parse(this.responseText));
+					planets = JSON.parse(this.responseText);
+					console.log(planets.planets[0]);
+
+				}
+			});
+
+			xhr.open("GET", "http://solarsystemgo.ipt.pt/SolarSystemGO-2020/WebServices/FrontEndServices/getSystem.php");
+			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+			xhr.send();
+
+
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		function planetPath(x, y) {
+
+
+
+
+
+			var i;
+			var pX = x;
+			var pY = y;
+			var path = [];
+			path.push([pX, pY]);
+			for (i = 0; i < 40; i++) {
+
+				var origX = pX - sunX;
+				var origY = pY - sunY;
+
+				var newX = origX * Math.cos(3.14 / 20) - origY * Math.sin(3.14 / 20);
+				var newY = origX * Math.sin(3.14 / 20) + origY * Math.cos(3.14 / 20);
+
+				path.push([newX + sunX, newY + sunY]);
+
+				pX = newX + sunX;
+				pY = newY + sunY;
+			}
+			return path;
+		}
+
+
+
+
+		function reedraw() {
+
+
+
+			if (canClean) {
+				map.removeLayer(markers);
+				canClean = 0;
+			}
+
+			markers = new L.FeatureGroup();
+
+
+
+			console.log(planets);
+			for (a in planets.planets) {
+				console.log("inside for");
+				console.log(a);
+				var planetY;
+
+
+
+
+				if (planets.planets[a].distanciafoco1 == 0) {
+
+
+
+
+					console.log("drawsun");
+					var icon = L.icon({ iconUrl: 'img/001.gif', iconSize: [planets.planets[a].size * 0.00003, planets.planets[a].size * 0.00003] });
+					var planetX = sunX;
+					planetY = sunY;
+					var marker = L.marker([planetX, planetY], { icon: icon }).on('click', onClick.bind(null, planets.planets[a].name, "info001"));
+
+					markers.addLayer(marker);
+
+					planetY = planetY + 0.0003278946045;
+
+					console.log(planetY);
+				}
+
+				else {
+
+					console.log("drawplanets");
+					var icon = L.icon({ iconUrl: 'img/000.gif', iconSize: [planets.planets[a].size * 0.0005, planets.planets[a].size * 0.0005] });
+					var planetX = sunX;
+					planetY = planetY + 0.0003278946045 * rRatio;
+					var planetS = planets.planets[a].speed;
+					planetSpeed = [planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS, planetS];
+					var marker = L.Marker.movingMarker(planetPath(planetX, planetY), planetSpeed, { autostart: true, loop: true, icon: icon }).on('click', onClick.bind(null, planets.planets[a].name, "info002"));
+					var poly = L.polyline(planetPath(planetX, planetY), { color: '#a6a8ad' });
+
+					markers.addLayer(marker);
+					markers.addLayer(poly);
+
+					console.log(planetY);
+				}
+
+
+
+			}
+
+
+
+			markers.addTo(map);
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+		function clean() {
+			console.log("cleaning");
+			canClean = 1;
+		}
+
+		function expand() {
+			rRatio = rRatio * 2;
+			reedraw();
+		}
+
+		function dim() {
+			rRatio = rRatio / 2;
+			reedraw();
+		}
+
+		function moreSpeed() {
+			clean();
+			for (a in planets.planets) {
+				console.log(planets.planets[a].speed);
+				planets.planets[a].speed = planets.planets[a].speed - 500;
+				console.log(planets.planets[a].speed);
+			}
+
+			reedraw();
+		}
+
+		function lessSpeed() {
+			clean();
+			for (a in planets.planets) {
+				console.log(planets.planets[a].speed);
+				planets.planets[a].speed = planets.planets[a].speed + 500;
+				console.log(planets.planets[a].speed);
+			}
+
+			reedraw();
+		}
+
+		function canChange() {
+			canCenter = 1;
+			clean();
+			changeCenter();
+		}
+
+		function changeCenter() {
+
+			if (canClean) {
+				map.removeLayer(markers);
+				canClean = 0;
+			}
+
+			console.log("changecenter");
+			modal.style.display = "none";
+
+
+			map.on('click', addMarker);
+
+			function addMarker(e) {
+				console.log("onclick");
+				if (canCenter == 1) {
+
+					sunX = e.latlng.lat;
+					sunY = e.latlng.lng;
+					reedraw();
+					canCenter = 0;
+				}
+			}
+
+		}
+
+
+
+
+
+
+
+
+
+		var modal = document.getElementById("myModal");
+		var span = document.getElementsByClassName("close")[0];
+
+		function onClick(text, link, e) {
+			document.getElementById("insert").innerHTML = text;
+			modal.style.display = "block";
+			document.getElementById("insert2").setAttribute("href", link + ".html");
+		}
+
+		// When the user clicks on <span> (x), close the modal
+		span.onclick = function () {
+			modal.style.display = "none";
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function (event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+		}
+
+
+
+
+	</script>
+</body>
+
+</html>

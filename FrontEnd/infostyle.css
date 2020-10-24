@@ -1,0 +1,34 @@
+body {
+	background-image: url('img/space.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+a, h1, p, table {
+	color: white;
+}
+
+img{
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+#texto{
+	border-radius: 10px;
+	border-color: white;
+	border-style: solid;
+	padding: 10px;
+	position: relative;
+	top: 30px;
+	left: 360px;
+	width: 25%;
+}
+
+#unityContainer{
+	position: absolute;
+	width: 700px;
+	height: 438px;
+	left: 800px;
+	top: 40px;
+}

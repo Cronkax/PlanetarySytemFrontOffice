@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Earth</title>
+		<link rel="stylesheet" href="infostyle.css" />
+    <script src="animacoes/004/UnityProgress.js"></script>
+    <script src="animacoes/004/UnityLoader.js"></script>
+    <script>
+			var unityInstance = UnityLoader.instantiate(
+				"unityContainer",
+				"animacoes/004/earth.json",
+				{onProgress: UnityProgress}
+			);
+    </script>
+		<style></style>
+	</head>
+	<body>
+		<div id="info">
+			<img id = "planet" src="img/004.gif">
+			<div id="texto">
+        <h1>Earth</h1>
+        <p>The third planet from the Sun and the only astronomical object known to harbor life.</p>
+        <p>Radius: 6371.0 km</p>
+        <p>Surface Area: 510072000 km<sup>2</sup></p>
+        <p>Volume: 1.08321&#215;10<sup>12</sup> km<sup>3</sup></p>
+        <p>Mass: 5.97237&#215;10<sup>24</sup> kg</p>
+        <p>Gravity: 9.80665 m/s<sup>2</sup></p>
+        <p>Temperature:</p>
+				<table>
+					<tr>
+						<th>Min:</th>
+						<td>184 K</td> 
+					</tr>
+					<tr>
+						<th>Mean:</th>
+						<td>287.16 K</td>
+					</tr>
+					<tr>
+						<th>Max:</th>
+						<td>330 K</td>
+					</tr>
+				</table>
+        <p>Rotation Period: 0.99726968 days</p>
+        <p>Rotation Velocity: 0.4651 km/s</p>
+        <p>Orbital Period: 365.256363004 days</p>
+        <p>Orbital Speed: 29.78 km/s</p>
+        <p>Satellites: the Moon</p>
+				<a id="wiki" href="https://en.wikipedia.org/wiki/Earth" >More Information</a>
+      </div>
+			<div id="unityContainer" ></div>
+		</div>		
+	</body>
+</html>

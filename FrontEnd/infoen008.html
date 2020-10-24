@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Uranus</title>
+		<link rel="stylesheet" href="infostyle.css" />
+		<script src="animacoes/008/UnityProgress.js"></script>
+    <script src="animacoes/008/UnityLoader.js"></script>
+    <script>
+			var unityInstance = UnityLoader.instantiate(
+				"unityContainer",
+				"animacoes/008/uranus.json",
+				{onProgress: UnityProgress}
+			);
+    </script>
+		<style></style>
+	</head>
+	<body>
+		<div id="info">
+			<img id = "planet" src="img/008.gif">
+			<div id="texto">
+        <h1>Uranus</h1>
+        <p>The seventh planet from the Sun.</p>
+        <p>Radius: 25362 &#177; 7 km</p>
+        <p>Surface Area: 8.1156&#215;10<sup>9</sup> km<sup>2</sup></p>
+        <p>Volume: 6.833&#215;10<sup>13</sup> km<sup>3</sup></p>
+        <p>Mass: (8.6810 &#177; 0.0013)&#215;10<sup>25</sup> kg</p>
+        <p>Gravity: 8.69 m/s<sup>2</sup></p>
+        <p>Temperature:</p>
+				<table>
+					<tr>
+						<th></th>
+						<th>Min</th>
+						<th>Mean</th>
+						<th>Max</th>
+					</tr>
+					<tr>
+						<th>1 bar</th>
+						<td></td> 
+						<td>76 K</td> 
+						<td></td> 
+					</tr>
+					<tr>
+						<th>0.1 bar</th>
+						<td>47 K</td>
+						<td>53 K</td>
+						<td>57 K</td>
+					</tr>
+				</table>
+        <p>Rotation Period: &#8722;0.71833 days</p>
+        <p>Rotation Velocity: 2.59 km/s</p>
+        <p>Orbital Period: 84.0205 years</p>
+        <p>Orbital Speed: 6.80 km/s</p>
+        <p>Satellites: 27</p>
+				<a id="wiki" href="https://en.wikipedia.org/wiki/Uranus" >More Information</a>
+      </div>
+			<div id="unityContainer" ></div>
+		</div>			
+	</body>
+</html>

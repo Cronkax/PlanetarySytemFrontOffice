@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Júpiter</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="infostyle.css" />
+		<script src="animacoes/006/UnityProgress.js"></script>
+    <script src="animacoes/006/UnityLoader.js"></script>
+    <script>
+			var unityInstance = UnityLoader.instantiate(
+				"unityContainer",
+				"animacoes/006/jupiter.json",
+				{onProgress: UnityProgress}
+			);
+    </script>
+		<style></style>
+	</head>
+	<body>
+		<div id="info">
+			<img id = "planet" src="img/006.gif">
+			<div id="texto">
+        <h1>Júpiter</h1>
+        <p>O quinto planeta a contar do Sol e o maior do Sistema Solar.</p>
+        <p>Raio: 69911 km</p>
+        <p>Área de Superficie: 6.1419&#215;10<sup>10</sup> km<sup>2</sup></p>
+        <p>Volume: 1.4313&#215;10<sup>15</sup> km<sup>3</sup></p>
+        <p>Massa: 1.8982&#215;10<sup>27</sup> kg</p>
+        <p>Gravidade: 24.79 m/s<sup>2</sup></p>
+        <p>Temperatura:</p>
+				<table>
+					<tr>
+						<th>1 bar:</th>
+						<td>165 K</td> 
+					</tr>
+					<tr>
+						<th>0.1 bar:</th>
+						<td>112 K</td>
+					</tr>
+				</table>
+        <p>Periodo de Rotação: 9.925 horas</p>
+        <p>Velocidade de Rotação: 12.6 km/s</p>
+        <p>Periodo Orbital: 11.862 anos</p>
+        <p>Velocidade Orbital: 13.07 km/s</p>
+        <p>Satélites: 79</p>
+				<a id="wiki" href="https://pt.wikipedia.org/wiki/J%C3%BApiter_(planeta)" >Mais Informação</a>
+      </div>
+			<div id="unityContainer" ></div>
+		</div>			
+	</body>
+</html>

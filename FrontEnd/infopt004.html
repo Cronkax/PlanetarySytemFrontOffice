@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Terra</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="infostyle.css" />
+    <script src="animacoes/004/UnityProgress.js"></script>
+    <script src="animacoes/004/UnityLoader.js"></script>
+    <script>
+			//esta variável vai iniciar a animação do planeta, feita em Unity, no DIV 'unityContainer'
+			var unityInstance = UnityLoader.instantiate(
+				"unityContainer",
+				"animacoes/004/earth.json",
+				{onProgress: UnityProgress}
+			);
+    </script>
+		<style></style>
+	</head>
+	<body>
+		<div id="info">
+			<img id = "planet" src="img/004.gif"><!--gif que mostra a rotação do planeta-->
+			
+			<!--DIV que contém toda a informação sobre o planeta-->
+			<div id="texto">
+        <h1>Terra</h1>
+        <p>O terceiro planeta a contar do Sol e o único objeto astronómico conhecido que contém vida.</p>
+        <p>Raio: 6371.0 km</p>
+        <p>Área de Superficie: 510072000 km<sup>2</sup></p>
+        <p>Volume: 1.08321&#215;10<sup>12</sup> km<sup>3</sup></p>
+        <p>Massa: 5.97237&#215;10<sup>24</sup> kg</p>
+        <p>Gravidade: 9.80665 m/s<sup>2</sup></p>
+        <p>Temperatura:</p>
+				<table>
+					<tr>
+						<th>Min:</th>
+						<td>184 K</td> 
+					</tr>
+					<tr>
+						<th>Médio:</th>
+						<td>287.16 K</td>
+					</tr>
+					<tr>
+						<th>Max:</th>
+						<td>330 K</td>
+					</tr>
+				</table>
+        <p>Periodo de Rotação: 0.99726968 dias</p>
+        <p>Velocidade de Rotação: 0.4651 km/s</p>
+        <p>Periodo Orbital: 365.256363004 dias</p>
+        <p>Velocidade Orbital: 29.78 km/s</p>
+        <p>Satélites: a Lua</p>
+				
+				<!--link que abre a página onde se foram buscar os dados-->
+				<a id="wiki" href="https://pt.wikipedia.org/wiki/Terra" >Mais Informação</a>
+      </div>
+			<div id="unityContainer" ></div><!--DIV que irá mostrar a animação feita em Unity-->
+		</div>		
+	</body>
+</html>
